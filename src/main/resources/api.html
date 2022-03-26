@@ -1,0 +1,22 @@
+first element of this stream, and
+the element immediately
+following the last element of the sequence does
+not match the
+given predicate.
+If this stream is unordered, and some (but not all) elements of
+this
+stream match the given predicate, then the behavior of
+this operation is
+nondeterministic; it is free to take any subset
+of matching elements
+(which includes the empty set).
+Independent of whether this stream is ordered or unordered if
+all
+elements of this stream match the given predicate then this
+operation
+takes all elements (the result is the same as the
+input), or if no
+elements of the stream match the given
+predicate then no elements are
+taken (the result is an empty
+stream).
