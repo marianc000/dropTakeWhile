@@ -1,4 +1,4 @@
-package newFeatures;
+package streams;
 
 import java.io.BufferedReader;
 import java.io.IOException;

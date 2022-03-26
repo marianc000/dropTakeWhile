@@ -1,4 +1,4 @@
-package newFeatures;
+package streams;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,10 +14,12 @@ public class DropTakeWhile {
 
     }
 
-    List<Line> getConclusion(List<Line> pdf) {
-        return pdf.stream().dropWhile(l -> !(l.txt.equals("Conclusions") && l.bold()))
+    String getConclusions(List<Line> pdf) {
+        return pdf.stream()
+                .dropWhile(l -> !(l.txt.equals("Conclusions") && l.bold()))
                 .takeWhile(l -> l.x == 0)
-                .skip(1).toList();
+                .skip(1) // header Conclusions 
+                .map(l -> l.txt).collect(Collectors.joining(" "));  
     }
 
     void run() {
@@ -27,16 +29,13 @@ public class DropTakeWhile {
                 new Line("Analysis is requested because", 0, false),
                 new Line("we see something strange", 0, false),
                 new Line("Results", 0, true),
-                new Line("We observed", 0, false),
-                new Line("this and that", 0, false),
+                new Line("We observed this", 0, false),
+                new Line("and detected that", 0, false),
                 new Line("Conclusions", 0, true),
                 new Line("We conclude that", 0, false),
-                new Line("it is fine", 0, false),
+                new Line("this is great", 0, false),
                 new Line("Prof. John Smith", 20, false)); // signature is indented
-        System.out.println(pdf.stream().map(l -> l.txt).collect(Collectors.joining("\n")));
-
-        System.out.println("Conclusions: "
-                + getConclusion(pdf).stream().map(l -> l.txt)
-                        .collect(Collectors.joining(" ")));
+        // System.out.println(pdf.stream().map(l -> l.txt).collect(Collectors.joining("\n")));
+        System.out.println(getConclusions(pdf));
     }
 }
